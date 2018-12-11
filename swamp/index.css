@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+main {
+    width: 480px;
+    height: 320px;
+    box-shadow: rgba(50, 50,50,0.1) 0 15px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #77aa77;
+}
+
+.field {
+    width: 480px;
+    height: 260px;
+    background: url("swamp-guy.png") no-repeat;
+    background-size: cover;
+}
+
+.popup {
+    padding: 15px 16px;
+    font-size: 15px;
+    width: 180px;
+    text-align: center;
+    box-sizing: border-box;
+    background: #ffe306;
+    color: #222;
+    border: 2px dotted crimson;
+    border-radius: 8px;
+    position: relative;
+    margin: 30px auto;
+}
+
+.packshot {
+    width: 190px;
+    position: relative;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    color: #222;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    opacity: 0;
+}
+
+.face {
+    position: absolute;
+    left: 80px;
+    top: 70px;
+    content: url("lol-face.png");
+    width: 70px;
+}
+
+
+.face, .popup, .packshot {
+    transition: opacity .8s;
+    opacity: 0;
+}
+.shown {
+    opacity: 1;
+}
+
