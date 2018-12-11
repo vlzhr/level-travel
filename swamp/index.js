@@ -1,10 +1,10 @@
-var popupNode, faceNode, packShotNode;
+var popupNode, faceNode, packShotNode, ageMarkNode;
 
 var actions= [
-    new Popup("Работа напоминает болото?"),
-    new Popup("Невыносимо хочется отдохнуть?"),
+    new Popup(["РАБОТА", "НАПОМИНАЕТ", "БОЛОТО?"]),
+    new Popup(["НЕВЫНОСИМО", "ХОЧЕТСЯ", "ОТДОХНУТЬ?"]),
     new Face(),
-    new Popup("Порадуйте себя морем на 3 дня и больше!"),
+    new Popup(["ПОРАДУЙТЕ СЕБЯ", "МОРЕМ НА 3 ДНЯ", "И БОЛЬШЕ!"]),
     new PackShot()
 ];
 var actionStep = 0;
@@ -22,7 +22,10 @@ function showElement(el, nextIn, isFinal) {
 function Popup(text) {
     this.text = text;
     this.show = function() {
-        popupNode.innerText = this.text;
+        for (var n in [0,1,2]) {
+            popupNode.children[n].innerText = this.text[n];
+        }
+        // popupNode.innerText = this.text;
         showElement(popupNode);
         nextIn = 3700;
     }
@@ -38,6 +41,7 @@ function Face() {
 function PackShot() {
     this.show = function() {
         showElement(packShotNode, 0, true);
+        ageMarkNode.style["margin-bottom"] = "24px";
     }
 }
 
@@ -54,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
     popupNode = document.querySelector(".popup");
     faceNode = document.querySelector(".face");
     packShotNode = document.querySelector(".packshot");
+    ageMarkNode = document.querySelector(".age-mark");
 
     window.setTimeout(function() {
         showAction();
