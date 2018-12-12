@@ -1,16 +1,16 @@
-var popupNode, faceNode, packShotNode, ageMarkNode;
+var popupNode, faceNode, packShotNode, ageMarkNode, headerNode;
 
 var actions= [
     new Popup(["РАБОТА", "НАПОМИНАЕТ", "БОЛОТО?"]),
     new Popup(["НЕВЫНОСИМО", "ХОЧЕТСЯ", "ОТДОХНУТЬ?"]),
     new Face(),
-    new Popup(["ПОРАДУЙТЕ СЕБЯ", "МОРЕМ НА 3 ДНЯ", "И БОЛЬШЕ!"]),
+    new Popup(["ПОРАДУЙТЕ&nbsp;СЕБЯ", "МОРЕМ&nbsp;НА&nbsp;3&nbsp;ДНЯ", "И&nbsp;БОЛЬШЕ!"]),
     new PackShot()
 ];
 var actionStep = 0;
 var nextIn = 3700;
 
-function showElement(el, nextIn, isFinal) {
+function showElement(el, isFinal) {
     el.classList.add("shown");
     if (!isFinal) {
         window.setTimeout(function () {
@@ -22,25 +22,34 @@ function showElement(el, nextIn, isFinal) {
 function Popup(text) {
     this.text = text;
     this.show = function() {
-        for (var n in [0,1,2]) {
-            popupNode.children[n].innerText = this.text[n];
+        for (let n in [0,1,2]) {
+            popupNode.children[n].innerHTML = this.text[n];
+            window.setTimeout(function() {
+                showElement(popupNode.children[n]);
+            }, n*200);
         }
-        // popupNode.innerText = this.text;
-        showElement(popupNode);
         nextIn = 3700;
     }
 }
 
 function Face() {
     this.show = function() {
-        showElement(faceNode);
+        showElement(faceNode, true);
         nextIn = 1000;
     }
 }
 
 function PackShot() {
     this.show = function() {
-        showElement(packShotNode, 0, true);
+        headerNode.style.marginTop = "40px";
+        showElement(packShotNode, true);
+
+        for (let n in [0,1,2]) {
+            window.setTimeout(function() {
+                showElement(packShotNode.children[n], true);
+            }, n*200);
+        }
+
         ageMarkNode.style["margin-bottom"] = "24px";
     }
 }
@@ -59,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     faceNode = document.querySelector(".face");
     packShotNode = document.querySelector(".packshot");
     ageMarkNode = document.querySelector(".age-mark");
+    headerNode = document.querySelector(".header");
 
     window.setTimeout(function() {
         showAction();

@@ -26,7 +26,8 @@ main {
     top: 73px;
     right: 0;
     width: 290px;
-    font-family: myriad-pro, sans-serif;
+    font-family: myriad-pro, sans-serif;=
+
 }
 .popup>div {
     background: #f5ec5f;
@@ -37,14 +38,18 @@ main {
     float: right;
     font-weight: 600;
     clear: both;
+    width: 20%;
+    overflow: hidden;
+    opacity: 0;
+    transition: width 1s, opacity .8s;
 }
-.popup>div:nth-child(1) {
+.popup>div:nth-child(1).shown {
     width: 100%;
 }
-.popup>div:nth-child(2) {
+.popup>div:nth-child(2).shown {
     width: 80%;
 }
-.popup>div:nth-child(3) {
+.popup>div:nth-child(3).shown {
     width: 60%;
 }
 
@@ -68,6 +73,8 @@ main {
     margin-bottom: 10px;
     height: 56px;
     font-weight: 600;
+    opacity: 0;
+    transition: opacity .8s;
 }
 .packshot .label:nth-child(1) img {
     height: 100%;
@@ -85,14 +92,14 @@ main {
 }
 .packshot button {
     height: 37px;
-    width: 33%;
+    width: 40%;
     border-radius: 16px;
     background-color: #459bcf;
     color: white;
     font-weight: 600;
     position: absolute;
     box-sizing: border-box;
-    left: 33%;
+    left: 30%;
     bottom: 30px;
     border: 0;
     font-size: 21px;
@@ -107,12 +114,12 @@ main {
 }
 
 
-.face, .popup, .packshot {
+.face, .packshot {
     transition: opacity .8s;
     opacity: 0;
 }
 .shown {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 .header {
@@ -124,6 +131,7 @@ main {
     justify-content: center;
     background-color: #f5ec5f;
     padding: 1px;
+    transition: margin-top .8s;
 }
 .header img {
     display: block;
